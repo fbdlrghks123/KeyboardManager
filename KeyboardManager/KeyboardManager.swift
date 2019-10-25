@@ -206,8 +206,6 @@ extension Reactive where Base: KeyboardManager {
             
             base._privateIsKeyboardShowing = true
             
-//            let oldKBFrame = base._kbFrame
-            
             if let info = notification.userInfo {
                 let curveUserInfoKey    = UIResponder.keyboardAnimationCurveUserInfoKey
                 let durationUserInfoKey = UIResponder.keyboardAnimationDurationUserInfoKey
@@ -232,11 +230,7 @@ extension Reactive where Base: KeyboardManager {
                 }
             }
             
-//            if /* base._kbFrame.equalTo(oldKBFrame) == false , */let _ = base._textFieldView,
-//                base._privateIsKeyboardShowing == true  {
-               
-                base.optimizedAdjustPosition()
-//            }
+            base.optimizedAdjustPosition()
         }
     }
     
@@ -262,8 +256,7 @@ extension Reactive where Base: KeyboardManager {
                 base._privateIsKeyboardShowing = false
                 base._lastScrollView = nil
                 base._kbFrame = CGRect.zero
-                
-                
+                base._beforeY = nil
             }
         }
     }
