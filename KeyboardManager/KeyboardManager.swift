@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class KeyboardManager: NSObject, UIGestureRecognizerDelegate {
+class KeyboardManager: NSObject {
     
     private var _kbShowNotification: Notification?
     
@@ -54,7 +54,6 @@ class KeyboardManager: NSObject, UIGestureRecognizerDelegate {
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapRecognized(_:)))
         tapGesture.cancelsTouchesInView = false
-        tapGesture.delegate = self
 
         return tapGesture
     }()
@@ -157,7 +156,6 @@ class KeyboardManager: NSObject, UIGestureRecognizerDelegate {
             _lastScrollView?.contentInset.bottom += _kbFrame.size.height
             _startingContentInsets = unwrappedSuperScrollView.contentInset
         }
-        //            let point = CGPoint(x: textView.frame.origin.x, y: textView.frame.maxY)
         
         if let textView = self._textFieldView as? UITextView, let lastScrollView = _lastScrollView {
           
@@ -195,7 +193,7 @@ extension Reactive where Base: KeyboardManager {
     }
     
     var removeGesture: Binder<Notification> {
-        return Binder(base) { base, notification in
+        return Binder(base) { base, _ in
             base._textFieldView?.window?.removeGestureRecognizer(base.resignFirstResponderGesture)
             base._textFieldView = nil
         }
@@ -235,7 +233,7 @@ extension Reactive where Base: KeyboardManager {
     }
     
     var didShow: Binder<Notification> {
-        return Binder(base) { base, notification in
+        return Binder(base) { base, _ in
             if let _ = base._textFieldView {
                 base.optimizedAdjustPosition()
             }
@@ -243,7 +241,7 @@ extension Reactive where Base: KeyboardManager {
     }
     
     var willHide: Binder<Notification> {
-        return Binder(base) { base, notification in
+        return Binder(base) { base, _ in
             if let unwrappedSuperScrollView = base._lastScrollView {
                 if let y = base._beforeY, let lastScroll = base._lastScrollView {
                     OperationQueue.main.addOperation {
