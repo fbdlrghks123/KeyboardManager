@@ -10,6 +10,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+enum BehindType {
+    case overlap
+    case unOverlap
+    case obscured
+    case unknown
+}
+
 class KeyboardManager: NSObject {
     
     private var _kbShowNotification: Notification?
@@ -29,8 +36,6 @@ class KeyboardManager: NSObject {
     var _animationDuration: TimeInterval = 0.25
     
     var _animationCurve: UIView.AnimationOptions = .curveEaseOut
-    
-    var _beforeY : CGFloat? = CGFloat(0)
     
     var _kbFrame = CGRect.zero
     
@@ -57,7 +62,6 @@ class KeyboardManager: NSObject {
 
         return tapGesture
     }()
-    
     
     private func registerAllNotification() {
         let textFieldDidBeginEditing = center.rx.notification(.textFieldDidBeginEditing)
@@ -103,7 +107,7 @@ class KeyboardManager: NSObject {
         }
     }
     
-    private func resignFirstResponder() {
+    func resignFirstResponder() {
         if let textFieldRetain = _textFieldView {
             
             let isResignFirstResponder = textFieldRetain.resignFirstResponder()
@@ -116,6 +120,7 @@ class KeyboardManager: NSObject {
     
     func optimizedAdjustPosition() {
         if _privateHasPendingAdjustRequest == false {
+            
             _privateHasPendingAdjustRequest = true
             OperationQueue.main.addOperation {
                 self.adjustPostion()
@@ -153,34 +158,65 @@ class KeyboardManager: NSObject {
         } else if let unwrappedSuperScrollView = superScrollView {
             
             _lastScrollView = unwrappedSuperScrollView
-            _lastScrollView?.contentInset.bottom += _kbFrame.size.height
-            _startingContentInsets = unwrappedSuperScrollView.contentInset
+            
+            let isBehindScroll = isBehindScrollView()
+            
+            if isBehindScroll != .unknown, isBehindScroll != .unOverlap {
+                _lastScrollView?.contentInset.bottom += _kbFrame.size.height + 10
+                _startingContentInsets = unwrappedSuperScrollView.contentInset
+            }
         }
+        
+        let isBehindScroll = isBehindScrollView()
         
         if let textView = self._textFieldView as? UITextView, let lastScrollView = _lastScrollView {
           
-            guard let cursorPotition = textView.selectedTextRange?.start else { return }
+            guard let cursorPotition = textView.selectedTextRange?.start, isBehind(view: textView) else { return }
+            
+            let contentViewSize = lastScrollView.contentSize.height
             let caretPositionRect = textView.caretRect(for: cursorPotition)
             let caretPositionY = caretPositionRect.origin.y - textView.contentOffset.y + caretPositionRect.height
                 
-            let contentViewSize = lastScrollView.contentSize.height
-
             let point = CGPoint(x: 0, y: caretPositionY + textView.frame.origin.y)
             
             if let textViewSuperView = textView.superview {
                 let margin = CGFloat(10)
                 
                 let convertToRect = textViewSuperView.convert(point, to: lastScrollView)
-                
-                let maxOffset = max(0, lastScrollView.contentSize.height - UIScreen.main.bounds.height)
+                let maxOffset = max(0, lastScrollView.contentSize.height - lastScrollView.frame.size.height)
                 let y = max(0, maxOffset - (contentViewSize - convertToRect.y) + _kbFrame.size.height)
                 
-                if y != 0 {
-                    _beforeY = y + margin
-                    lastScrollView.setContentOffset(CGPoint(x: 0, y: y + margin), animated: true)
+                if y != 0, isBehindScroll == .overlap {
+                    lastScrollView.setContentOffset(CGPoint(x: 0, y: max(0, y + margin)), animated: true)
                 }
             }
         }
+    }
+    
+    func isBehindScrollView() -> BehindType {
+        guard let keyWindow = UIApplication.shared.keyWindow, let lastScrollView = _lastScrollView else { return .unknown }
+        
+        let scrollViewEndPoint = lastScrollView.frame.origin.y + lastScrollView.frame.size.height
+        let keyboardOffset = keyWindow.frame.size.height - _kbFrame.size.height
+        
+        if lastScrollView.frame.origin.y > keyboardOffset { // 키보드에 가려짐
+            return .obscured
+        } else if (scrollViewEndPoint < keyboardOffset) == true { // 겹치지 않음
+            return .unOverlap
+        } else {
+            return .overlap
+        }
+    }
+    
+    func isBehind(view: UIView?) -> Bool {
+        guard let keyWindow = UIApplication.shared.keyWindow, let frontView = view, let superView = frontView.superview else { return false }
+        
+        let keyWindowToRect = superView.convert(frontView.frame, to: keyWindow).origin.y
+        let keyboardMaxY = UIScreen.main.bounds.size.height - _kbFrame.height
+        
+        print("isBehind: ", keyboardMaxY < keyWindowToRect)
+        
+        return keyboardMaxY < keyWindowToRect
     }
 }
 
@@ -234,7 +270,7 @@ extension Reactive where Base: KeyboardManager {
     
     var didShow: Binder<Notification> {
         return Binder(base) { base, _ in
-            if let _ = base._textFieldView {
+            if base._textFieldView != nil {
                 base.optimizedAdjustPosition()
             }
         }
@@ -243,18 +279,11 @@ extension Reactive where Base: KeyboardManager {
     var willHide: Binder<Notification> {
         return Binder(base) { base, _ in
             if let unwrappedSuperScrollView = base._lastScrollView {
-                if let y = base._beforeY, let lastScroll = base._lastScrollView {
-                    OperationQueue.main.addOperation {
-                        let maxY = max(0, lastScroll.contentOffset.y - y)
-                        lastScroll.setContentOffset(CGPoint(x: 0, y: maxY), animated: true)
-                    }
-                }
                 unwrappedSuperScrollView.contentInset = .zero
                 base._startingContentInsets = UIEdgeInsets()
                 base._privateIsKeyboardShowing = false
                 base._lastScrollView = nil
                 base._kbFrame = CGRect.zero
-                base._beforeY = nil
             }
         }
     }
