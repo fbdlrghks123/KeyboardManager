@@ -1,15 +1,14 @@
 Pod::Spec.new do |s|
   s.name             = 'SimpleKeyboardManager'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'PodRegister'
   s.description      = <<-DESC
-                      PodRegister
+                      0.1.1 Update
                       DESC
   s.homepage         = 'https://github.com/fbdlrghks123/SimpleKeyboardManager.git'
-  s.screenshots      = '[IMAGE URL 1]', '[IMAGE URL 2]'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { '[ACCOUNT]' => '[E-MAIL]' }
-  s.source           = { :git => 'https://github.com/fbdlrghks123/SimpleKeyboardManager.git', :commit => "6ca98f66100b156331210621652a32e1f219c042" }
+  s.author           = { 'fbdlrghks123' => 'fbdlrghks123@naver.com' }
+  s.source           = { :git => 'https://github.com/fbdlrghks123/SimpleKeyboardManager.git', :tag => s.version.to_s }
   s.ios.deployment_target = '10.0'
   s.swift_versions = '5.0'
   s.source_files = 'Sources/*.swift'
