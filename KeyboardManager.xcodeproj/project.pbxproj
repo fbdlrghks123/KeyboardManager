@@ -15,7 +15,37 @@
 		A2AB575A236922780078108C /* KeyboardManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AB5757236922780078108C /* KeyboardManager+Extension.swift */; };
 		A2AB575B236922780078108C /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AB5758236922780078108C /* KeyboardManager.swift */; };
 		A2AB575C236922780078108C /* Notification+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AB5759236922780078108C /* Notification+Keyboard.swift */; };
+		A2AB5767236949360078108C /* KeyboardManager_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = A2AB5765236949360078108C /* KeyboardManager_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2AB576A236949360078108C /* KeyboardManager_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2AB5763236949360078108C /* KeyboardManager_iOS.framework */; };
+		A2AB576B236949360078108C /* KeyboardManager_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2AB5763236949360078108C /* KeyboardManager_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A2AB5770236949610078108C /* KeyboardManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AB5757236922780078108C /* KeyboardManager+Extension.swift */; };
+		A2AB5771236949610078108C /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AB5758236922780078108C /* KeyboardManager.swift */; };
+		A2AB5772236949610078108C /* Notification+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AB5759236922780078108C /* Notification+Keyboard.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A2AB5768236949360078108C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A296D855235ECB8C0095CFB6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A2AB5762236949360078108C;
+			remoteInfo = "KeyboardManager iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A2AB576F236949360078108C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A2AB576B236949360078108C /* KeyboardManager_iOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A296D85D235ECB8C0095CFB6 /* KeyboardManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyboardManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -28,10 +58,21 @@
 		A2AB5757236922780078108C /* KeyboardManager+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyboardManager+Extension.swift"; sourceTree = "<group>"; };
 		A2AB5758236922780078108C /* KeyboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		A2AB5759236922780078108C /* Notification+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Notification+Keyboard.swift"; sourceTree = "<group>"; };
+		A2AB5763236949360078108C /* KeyboardManager_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KeyboardManager_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2AB5765236949360078108C /* KeyboardManager_iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardManager_iOS.h; sourceTree = "<group>"; };
+		A2AB5766236949360078108C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A296D85A235ECB8C0095CFB6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2AB576A236949360078108C /* KeyboardManager_iOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2AB5760236949360078108C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -46,6 +87,7 @@
 			children = (
 				A2AB5756236922780078108C /* Sources */,
 				A296D85F235ECB8C0095CFB6 /* KeyboardManager */,
+				A2AB5764236949360078108C /* KeyboardManager iOS */,
 				A296D85E235ECB8C0095CFB6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				A296D85D235ECB8C0095CFB6 /* KeyboardManager.app */,
+				A2AB5763236949360078108C /* KeyboardManager_iOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -81,7 +124,27 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		A2AB5764236949360078108C /* KeyboardManager iOS */ = {
+			isa = PBXGroup;
+			children = (
+				A2AB5765236949360078108C /* KeyboardManager_iOS.h */,
+				A2AB5766236949360078108C /* Info.plist */,
+			);
+			path = "KeyboardManager iOS";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A2AB575E236949360078108C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2AB5767236949360078108C /* KeyboardManager_iOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		A296D85C235ECB8C0095CFB6 /* KeyboardManager */ = {
@@ -91,15 +154,35 @@
 				A296D859235ECB8C0095CFB6 /* Sources */,
 				A296D85A235ECB8C0095CFB6 /* Frameworks */,
 				A296D85B235ECB8C0095CFB6 /* Resources */,
+				A2AB576F236949360078108C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A2AB5769236949360078108C /* PBXTargetDependency */,
 			);
 			name = KeyboardManager;
 			productName = Keyboard;
 			productReference = A296D85D235ECB8C0095CFB6 /* KeyboardManager.app */;
 			productType = "com.apple.product-type.application";
+		};
+		A2AB5762236949360078108C /* KeyboardManager iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A2AB576C236949360078108C /* Build configuration list for PBXNativeTarget "KeyboardManager iOS" */;
+			buildPhases = (
+				A2AB575E236949360078108C /* Headers */,
+				A2AB575F236949360078108C /* Sources */,
+				A2AB5760236949360078108C /* Frameworks */,
+				A2AB5761236949360078108C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "KeyboardManager iOS";
+			productName = "KeyboardManager iOS";
+			productReference = A2AB5763236949360078108C /* KeyboardManager_iOS.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -112,6 +195,9 @@
 				ORGANIZATIONNAME = ryuickhwan;
 				TargetAttributes = {
 					A296D85C235ECB8C0095CFB6 = {
+						CreatedOnToolsVersion = 11.1;
+					};
+					A2AB5762236949360078108C = {
 						CreatedOnToolsVersion = 11.1;
 					};
 				};
@@ -130,6 +216,7 @@
 			projectRoot = "";
 			targets = (
 				A296D85C235ECB8C0095CFB6 /* KeyboardManager */,
+				A2AB5762236949360078108C /* KeyboardManager iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -142,6 +229,13 @@
 				A296D86D235ECB8D0095CFB6 /* LaunchScreen.storyboard in Resources */,
 				A296D86A235ECB8D0095CFB6 /* Assets.xcassets in Resources */,
 				A296D868235ECB8C0095CFB6 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2AB5761236949360078108C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,7 +254,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A2AB575F236949360078108C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2AB5770236949610078108C /* KeyboardManager+Extension.swift in Sources */,
+				A2AB5771236949610078108C /* KeyboardManager.swift in Sources */,
+				A2AB5772236949610078108C /* Notification+Keyboard.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A2AB5769236949360078108C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A2AB5762236949360078108C /* KeyboardManager iOS */;
+			targetProxy = A2AB5768236949360078108C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A296D866235ECB8C0095CFB6 /* Main.storyboard */ = {
@@ -299,6 +411,7 @@
 		A296D872235ECB8D0095CFB6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9P5QVDV7V7;
@@ -319,6 +432,7 @@
 		A296D873235ECB8D0095CFB6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9P5QVDV7V7;
@@ -333,6 +447,62 @@
 				PRODUCT_NAME = KeyboardManager;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A2AB576D236949360078108C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 9P5QVDV7V7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "KeyboardManager iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "kr.co.station3.Dabang.KeyboardManager-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A2AB576E236949360078108C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 9P5QVDV7V7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "KeyboardManager iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "kr.co.station3.Dabang.KeyboardManager-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -353,6 +523,15 @@
 			buildConfigurations = (
 				A296D872235ECB8D0095CFB6 /* Debug */,
 				A296D873235ECB8D0095CFB6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A2AB576C236949360078108C /* Build configuration list for PBXNativeTarget "KeyboardManager iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2AB576D236949360078108C /* Debug */,
+				A2AB576E236949360078108C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
