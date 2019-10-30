@@ -8,6 +8,11 @@ TextView supports scrolling to cursor position
 
 Support keyboard hiding automatically when touching the screen
 
+## GIF Animation
+
+![example.gif](https://github.com/fbdlrghks123/SimpleKeyboardManager/blob/master/ScreenShot/example.gif?raw=true)
+
+
 ## Requirements
 
 |                       | Language | Minimum iOS Target | Minimum Xcode Version |
@@ -64,11 +69,6 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 }
 ```
 
-
-
-## GIF Animation
-
-![example.gif](https://github.com/fbdlrghks123/SimpleKeyboardManager/blob/master/ScreenShot/example.gif?raw=true)
 
 
 
