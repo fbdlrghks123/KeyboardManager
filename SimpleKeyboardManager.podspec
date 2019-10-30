@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name             = 'SimpleKeyboardManager'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'PodRegister'
   s.description      = <<-DESC
-                      0.1.1 Update
+                      0.1.2 Update
                       DESC
   s.homepage         = 'https://github.com/fbdlrghks123/SimpleKeyboardManager.git'
   s.license          = { :type => "MIT", :file => "/Users/ryuickhwan/Desktop/KeyboardManager/LICENSE" }
