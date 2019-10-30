@@ -6,10 +6,11 @@ Pod::Spec.new do |s|
                       0.1.1 Update
                       DESC
   s.homepage         = 'https://github.com/fbdlrghks123/SimpleKeyboardManager.git'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.license          = { :type => "MIT", :file => "/Users/ryuickhwan/Desktop/KeyboardManager/LICENSE" }
   s.author           = { 'fbdlrghks123' => 'fbdlrghks123@naver.com' }
-  s.source           = { :git => 'https://github.com/fbdlrghks123/SimpleKeyboardManager.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/fbdlrghks123/SimpleKeyboardManager.git', :tag => "#{s.version}" }
   s.ios.deployment_target = '10.0'
-  s.swift_versions = '5.0'
-  s.source_files = 'Sources/*.swift'
+  s.platform        = :ios, "10.0"
+  s.swift_version = '5.0'
+  s.source_files = 'Sources/*'
 end
