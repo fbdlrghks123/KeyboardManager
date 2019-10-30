@@ -7,22 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A266B45D235FE01500D4E03C /* Notification+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A266B45C235FE01500D4E03C /* Notification+Keyboard.swift */; };
-		A266B45F235FE21600D4E03C /* KeyboardManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A266B45E235FE21600D4E03C /* KeyboardManager+Extension.swift */; };
 		A296D861235ECB8C0095CFB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A296D860235ECB8C0095CFB6 /* AppDelegate.swift */; };
 		A296D865235ECB8C0095CFB6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A296D864235ECB8C0095CFB6 /* ViewController.swift */; };
 		A296D868235ECB8C0095CFB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A296D866235ECB8C0095CFB6 /* Main.storyboard */; };
 		A296D86A235ECB8D0095CFB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A296D869235ECB8D0095CFB6 /* Assets.xcassets */; };
 		A296D86D235ECB8D0095CFB6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A296D86B235ECB8D0095CFB6 /* LaunchScreen.storyboard */; };
-		A296D875235ECBE70095CFB6 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A296D874235ECBE70095CFB6 /* KeyboardManager.swift */; };
-		FB097D856150DD3201121490 /* libPods-KeyboardManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C09DBEA6D22128E059769FDB /* libPods-KeyboardManager.a */; };
+		A2AB575A236922780078108C /* KeyboardManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AB5757236922780078108C /* KeyboardManager+Extension.swift */; };
+		A2AB575B236922780078108C /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AB5758236922780078108C /* KeyboardManager.swift */; };
+		A2AB575C236922780078108C /* Notification+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AB5759236922780078108C /* Notification+Keyboard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		329425B47A020140A14BFEC8 /* Pods-KeyboardManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeyboardManager.debug.xcconfig"; path = "Target Support Files/Pods-KeyboardManager/Pods-KeyboardManager.debug.xcconfig"; sourceTree = "<group>"; };
-		3DD3564954C1DA3385C46964 /* Pods-Keyboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keyboard.release.xcconfig"; path = "Target Support Files/Pods-Keyboard/Pods-Keyboard.release.xcconfig"; sourceTree = "<group>"; };
-		A266B45C235FE01500D4E03C /* Notification+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Keyboard.swift"; sourceTree = "<group>"; };
-		A266B45E235FE21600D4E03C /* KeyboardManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardManager+Extension.swift"; sourceTree = "<group>"; };
 		A296D85D235ECB8C0095CFB6 /* KeyboardManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyboardManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A296D860235ECB8C0095CFB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A296D864235ECB8C0095CFB6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -30,11 +25,9 @@
 		A296D869235ECB8D0095CFB6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A296D86C235ECB8D0095CFB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A296D86E235ECB8D0095CFB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A296D874235ECBE70095CFB6 /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
-		AD48ACE979F9C3685AC64E5D /* libPods-Keyboard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Keyboard.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C09DBEA6D22128E059769FDB /* libPods-KeyboardManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KeyboardManager.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E3B2DB5227723BDA6DAC53C0 /* Pods-KeyboardManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeyboardManager.release.xcconfig"; path = "Target Support Files/Pods-KeyboardManager/Pods-KeyboardManager.release.xcconfig"; sourceTree = "<group>"; };
-		F0073ED6F2AC7A4CDAD63085 /* Pods-Keyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keyboard.debug.xcconfig"; path = "Target Support Files/Pods-Keyboard/Pods-Keyboard.debug.xcconfig"; sourceTree = "<group>"; };
+		A2AB5757236922780078108C /* KeyboardManager+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyboardManager+Extension.swift"; sourceTree = "<group>"; };
+		A2AB5758236922780078108C /* KeyboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
+		A2AB5759236922780078108C /* Notification+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Notification+Keyboard.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,40 +35,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB097D856150DD3201121490 /* libPods-KeyboardManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3DED3FCFCF6F3F6EBC785FDB /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				AD48ACE979F9C3685AC64E5D /* libPods-Keyboard.a */,
-				C09DBEA6D22128E059769FDB /* libPods-KeyboardManager.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		5FDE9DFE1CC319F50F2962B4 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F0073ED6F2AC7A4CDAD63085 /* Pods-Keyboard.debug.xcconfig */,
-				3DD3564954C1DA3385C46964 /* Pods-Keyboard.release.xcconfig */,
-				329425B47A020140A14BFEC8 /* Pods-KeyboardManager.debug.xcconfig */,
-				E3B2DB5227723BDA6DAC53C0 /* Pods-KeyboardManager.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		A296D854235ECB8C0095CFB6 = {
 			isa = PBXGroup;
 			children = (
+				A2AB5756236922780078108C /* Sources */,
 				A296D85F235ECB8C0095CFB6 /* KeyboardManager */,
 				A296D85E235ECB8C0095CFB6 /* Products */,
-				5FDE9DFE1CC319F50F2962B4 /* Pods */,
-				3DED3FCFCF6F3F6EBC785FDB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,9 +61,6 @@
 		A296D85F235ECB8C0095CFB6 /* KeyboardManager */ = {
 			isa = PBXGroup;
 			children = (
-				A296D874235ECBE70095CFB6 /* KeyboardManager.swift */,
-				A266B45C235FE01500D4E03C /* Notification+Keyboard.swift */,
-				A266B45E235FE21600D4E03C /* KeyboardManager+Extension.swift */,
 				A296D860235ECB8C0095CFB6 /* AppDelegate.swift */,
 				A296D864235ECB8C0095CFB6 /* ViewController.swift */,
 				A296D866235ECB8C0095CFB6 /* Main.storyboard */,
@@ -103,6 +71,16 @@
 			path = KeyboardManager;
 			sourceTree = "<group>";
 		};
+		A2AB5756236922780078108C /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				A2AB5757236922780078108C /* KeyboardManager+Extension.swift */,
+				A2AB5758236922780078108C /* KeyboardManager.swift */,
+				A2AB5759236922780078108C /* Notification+Keyboard.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -110,7 +88,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A296D871235ECB8D0095CFB6 /* Build configuration list for PBXNativeTarget "KeyboardManager" */;
 			buildPhases = (
-				BEF199C093E2FF5EBCE669BE /* [CP] Check Pods Manifest.lock */,
 				A296D859235ECB8C0095CFB6 /* Sources */,
 				A296D85A235ECB8C0095CFB6 /* Frameworks */,
 				A296D85B235ECB8C0095CFB6 /* Resources */,
@@ -170,41 +147,16 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		BEF199C093E2FF5EBCE669BE /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-KeyboardManager-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		A296D859235ECB8C0095CFB6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A296D875235ECBE70095CFB6 /* KeyboardManager.swift in Sources */,
-				A266B45F235FE21600D4E03C /* KeyboardManager+Extension.swift in Sources */,
-				A266B45D235FE01500D4E03C /* Notification+Keyboard.swift in Sources */,
+				A2AB575C236922780078108C /* Notification+Keyboard.swift in Sources */,
+				A2AB575B236922780078108C /* KeyboardManager.swift in Sources */,
 				A296D865235ECB8C0095CFB6 /* ViewController.swift in Sources */,
 				A296D861235ECB8C0095CFB6 /* AppDelegate.swift in Sources */,
+				A2AB575A236922780078108C /* KeyboardManager+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,7 +232,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -334,7 +286,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -346,7 +298,6 @@
 		};
 		A296D872235ECB8D0095CFB6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 329425B47A020140A14BFEC8 /* Pods-KeyboardManager.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -357,6 +308,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ickhwan.keyboardManager;
 				PRODUCT_NAME = KeyboardManager;
 				SWIFT_VERSION = 5.0;
@@ -366,7 +318,6 @@
 		};
 		A296D873235ECB8D0095CFB6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E3B2DB5227723BDA6DAC53C0 /* Pods-KeyboardManager.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -377,6 +328,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ickhwan.keyboardManager;
 				PRODUCT_NAME = KeyboardManager;
 				SWIFT_VERSION = 5.0;

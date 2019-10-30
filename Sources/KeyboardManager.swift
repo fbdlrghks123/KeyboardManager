@@ -7,55 +7,51 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
 
 enum BehindType {
-    case overlap
-    case unOverlap
-    case obscured
-    case unknown
+   case overlap
+   case unOverlap
+   case obscured
+   case unknown
 }
 
-class KeyboardManager: NSObject {
+final public class KeyboardManager: NSObject {
     
-    private var _kbShowNotification: Notification?
+    private weak var _textFieldView: UIView?
     
-    private let center = NotificationCenter.default
-    private static var sharedInstence = KeyboardManager()
+    private weak var _lastScrollView: UIScrollView?
     
-    private var _privateHasPendingAdjustRequest = false
+    private var _privateHasPendingAdjustRequest: Bool = false
     
-    weak var _textFieldView: UIView?
-    weak var _lastScrollView: UIScrollView?
+    private var _privateIsKeyboardShowing: Bool = false
     
-    var _privateIsKeyboardShowing = false
+    private var _startingContentInsets: UIEdgeInsets = UIEdgeInsets()
     
-    var _startingContentInsets = UIEdgeInsets()
+    private var _animationDuration: TimeInterval = 0.25
     
-    var _animationDuration: TimeInterval = 0.25
+    private var _animationCurve: UIView.AnimationOptions = .curveEaseOut
     
-    var _animationCurve: UIView.AnimationOptions = .curveEaseOut
+    private var _kbFrame: CGRect = CGRect.zero
     
-    var _kbFrame = CGRect.zero
+    private let center: NotificationCenter = NotificationCenter.default
+    
+    private static var sharedInstence: KeyboardManager = KeyboardManager()
     
     @discardableResult
-    static func shared() -> KeyboardManager {
+    static public func shared() -> KeyboardManager {
         return KeyboardManager.sharedInstence
     }
     
-    private var disposeBag = DisposeBag()
-    
     override init() {
         super.init()
-        registerAllNotification()
+        registerNotification()
     }
     
     deinit {
-        unRegisterAllNotification()
+        unRegisterNotification()
     }
     
-    lazy var resignFirstResponderGesture: UITapGestureRecognizer = {
+    private lazy var resignFirstResponderGesture: UITapGestureRecognizer = {
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapRecognized(_:)))
         tapGesture.cancelsTouchesInView = false
@@ -63,41 +59,29 @@ class KeyboardManager: NSObject {
         return tapGesture
     }()
     
-    private func registerAllNotification() {
-        let textFieldDidBeginEditing = center.rx.notification(.textFieldDidBeginEditing)
-        let textFieldDidEndEditing   = center.rx.notification(.textFieldDidEndEditing)
+    private func registerNotification() {
         
-        let textViewDidBeginEditing = center.rx.notification(.textViewDidBeginEditing)
-        let textViewDidEndEditing   = center.rx.notification(.textViewDidEndEditing)
+        center.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .keyboardWillShow, object: nil)
+        center.addObserver(self, selector: #selector(keyboardDidShow(_:)),  name: .keyboardDidShow, object: nil)
+        center.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .keyboardWillHide, object: nil)
         
-        Observable.merge([textFieldDidBeginEditing, textViewDidBeginEditing])
-            .bind(to: self.rx.addGesture)
-            .disposed(by: disposeBag)
-               
-        Observable.merge([textFieldDidEndEditing, textViewDidEndEditing])
-           .bind(to: self.rx.removeGesture)
-           .disposed(by: disposeBag)
         
-        registerKeyboardNotification()
+        center.addObserver(self, selector: #selector(textFieldViewDidBeginEditing(_:)), name: .textFieldDidBeginEditing, object: nil)
+        center.addObserver(self, selector: #selector(textFieldViewDidBeginEditing(_:)), name: .textViewDidBeginEditing, object: nil)
+        center.addObserver(self, selector: #selector(textFieldViewDidEndEditing(_:)), name: .textFieldDidEndEditing, object: nil)
+        center.addObserver(self, selector: #selector(textFieldViewDidEndEditing(_:)), name: .textViewDidEndEditing, object: nil)
     }
     
-    private func unRegisterAllNotification() {
-        disposeBag = DisposeBag()
-    }
-    
-    private func registerKeyboardNotification() {
+    private func unRegisterNotification() {
         
-        center.rx.notification(.keyboardWillShow)
-            .bind(to: self.rx.willShow)
-            .disposed(by: disposeBag)
+        center.removeObserver(self, name: .keyboardWillShow, object: nil)
+        center.removeObserver(self, name: .keyboardDidShow, object: nil)
+        center.removeObserver(self, name: .keyboardWillHide, object: nil)
         
-        center.rx.notification(.keyboardDidShow)
-            .bind(to: self.rx.didShow)
-            .disposed(by: disposeBag)
-
-        center.rx.notification(.keyboardWillHide)
-            .bind(to: self.rx.willHide)
-            .disposed(by: disposeBag)
+        center.removeObserver(self, name: .textFieldDidBeginEditing, object: nil)
+        center.removeObserver(self, name: .textViewDidBeginEditing, object: nil)
+        center.removeObserver(self, name: .textFieldDidEndEditing, object: nil)
+        center.removeObserver(self, name: .textViewDidEndEditing, object: nil)
     }
     
     @objc private func tapRecognized(_ gesture: UITapGestureRecognizer) {
@@ -107,7 +91,7 @@ class KeyboardManager: NSObject {
         }
     }
     
-    func resignFirstResponder() {
+    public func resignFirstResponder() {
         if let textFieldRetain = _textFieldView {
             
             let isResignFirstResponder = textFieldRetain.resignFirstResponder()
@@ -118,7 +102,7 @@ class KeyboardManager: NSObject {
         }
     }
     
-    func optimizedAdjustPosition() {
+    private func optimizedAdjustPosition() {
         if _privateHasPendingAdjustRequest == false {
             
             _privateHasPendingAdjustRequest = true
@@ -199,9 +183,9 @@ class KeyboardManager: NSObject {
         let scrollViewEndPoint = lastScrollView.frame.origin.y + lastScrollView.frame.size.height
         let keyboardOffset = keyWindow.frame.size.height - _kbFrame.size.height
         
-        if lastScrollView.frame.origin.y > keyboardOffset { // 키보드에 가려짐
+        if lastScrollView.frame.origin.y > keyboardOffset {
             return .obscured
-        } else if (scrollViewEndPoint < keyboardOffset) == true { // 겹치지 않음
+        } else if (scrollViewEndPoint < keyboardOffset) == true {
             return .unOverlap
         } else {
             return .overlap
@@ -218,73 +202,67 @@ class KeyboardManager: NSObject {
         
         return keyboardMaxY < keyWindowToRect
     }
-}
+    
+    
+    // Keyboard && TextFieldEditing Notification
+    @objc private func keyboardWillShow(_ notification: Notification?) {
+       
+        _privateIsKeyboardShowing = true
+        
+        if let info = notification?.userInfo {
+            let curveUserInfoKey    = UIResponder.keyboardAnimationCurveUserInfoKey
+            let durationUserInfoKey = UIResponder.keyboardAnimationDurationUserInfoKey
+            let frameEndUserInfoKey = UIResponder.keyboardFrameEndUserInfoKey
 
-extension Reactive where Base: KeyboardManager {
-    var addGesture: Binder<Notification> {
-        return Binder(base) { base, notification in
-            base._textFieldView = notification.object as? UIView
-            base._textFieldView?.window?.addGestureRecognizer(base.resignFirstResponderGesture)
-        }
-    }
-    
-    var removeGesture: Binder<Notification> {
-        return Binder(base) { base, _ in
-            base._textFieldView?.window?.removeGestureRecognizer(base.resignFirstResponderGesture)
-            base._textFieldView = nil
-        }
-    }
-    
-    var willShow: Binder<Notification> {
-        return Binder(base) { base, notification in
-            
-            base._privateIsKeyboardShowing = true
-            
-            if let info = notification.userInfo {
-                let curveUserInfoKey    = UIResponder.keyboardAnimationCurveUserInfoKey
-                let durationUserInfoKey = UIResponder.keyboardAnimationDurationUserInfoKey
-                let frameEndUserInfoKey = UIResponder.keyboardFrameEndUserInfoKey
-                
-                if let curve = info[curveUserInfoKey] as? UInt {
-                    base._animationCurve = .init(rawValue: curve)
-                } else {
-                    base._animationCurve = .curveEaseOut
-                }
-                
-                if let kbFrame = info[frameEndUserInfoKey] as? CGRect {
-                    base._kbFrame = kbFrame
-                }
-                
-                if let duration = info[durationUserInfoKey] as? TimeInterval {
-                    if duration != 0.0 {
-                        base._animationDuration = duration
-                    }
-                } else {
-                    base._animationDuration = 0.25
-                }
+            if let curve = info[curveUserInfoKey] as? UInt {
+                _animationCurve = .init(rawValue: curve)
+            } else {
+                _animationCurve = .curveEaseOut
             }
-            
-            base.optimizedAdjustPosition()
-        }
-    }
-    
-    var didShow: Binder<Notification> {
-        return Binder(base) { base, _ in
-            if base._textFieldView != nil {
-                base.optimizedAdjustPosition()
+
+            if let kbFrame = info[frameEndUserInfoKey] as? CGRect {
+                _kbFrame = kbFrame
+            }
+
+            if let duration = info[durationUserInfoKey] as? TimeInterval {
+                if duration != 0.0 {
+                    _animationDuration = duration
+                }
+            } else {
+                _animationDuration = 0.25
             }
         }
+
+        optimizedAdjustPosition()
     }
     
-    var willHide: Binder<Notification> {
-        return Binder(base) { base, _ in
-            if let unwrappedSuperScrollView = base._lastScrollView {
-                unwrappedSuperScrollView.contentInset = .zero
-                base._startingContentInsets = UIEdgeInsets()
-                base._privateIsKeyboardShowing = false
-                base._lastScrollView = nil
-                base._kbFrame = CGRect.zero
-            }
+    @objc private func keyboardDidShow(_ notification: Notification?) {
+       
+        if _textFieldView != nil {
+            optimizedAdjustPosition()
         }
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification?) {
+        
+        if let unwrappedSuperScrollView = _lastScrollView {
+            unwrappedSuperScrollView.contentInset = .zero
+            _startingContentInsets = UIEdgeInsets()
+            _privateIsKeyboardShowing = false
+            _lastScrollView = nil
+            _kbFrame = CGRect.zero
+        }
+    }
+    
+    @objc private func textFieldViewDidBeginEditing(_ notification: Notification?) {
+       
+        _textFieldView = notification?.object as? UIView
+        _textFieldView?.window?.addGestureRecognizer(resignFirstResponderGesture)
+    }
+    
+    @objc private func textFieldViewDidEndEditing(_ notification: Notification?) {
+        
+        _textFieldView?.window?.removeGestureRecognizer(resignFirstResponderGesture)
+        _textFieldView = nil
     }
 }

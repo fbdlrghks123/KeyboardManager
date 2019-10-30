@@ -7,26 +7,23 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var scrollView : UIScrollView!
-    @IBOutlet weak var textView : UITextView!
-    
-    let disposeBag = DisposeBag()
+    @IBOutlet weak var textView : UITextView! {
+        didSet {
+            textView.layer.borderWidth = 1
+            textView.layer.borderColor = UIColor.black.cgColor
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        textView.layer.borderWidth = 1
-        textView.layer.borderColor = UIColor.black.cgColor
-        
-        scrollView.rx.didScroll.subscribe { _ in
-            print("postion: \(self.scrollView.contentOffset.y)")
-        }.disposed(by: disposeBag)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("postion: \(scrollView.contentOffset.y)")
     }
 }
 

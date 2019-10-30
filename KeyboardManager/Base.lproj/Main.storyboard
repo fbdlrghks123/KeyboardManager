@@ -98,6 +98,9 @@
                                     <constraint firstAttribute="bottom" secondItem="9Wh-oV-Sej" secondAttribute="bottom" priority="250" id="yd4-PN-kOJ"/>
                                     <constraint firstItem="9Wh-oV-Sej" firstAttribute="top" secondItem="4KE-rm-35Q" secondAttribute="top" id="zYd-ZT-2cy"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="wC5-fG-uyF"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
